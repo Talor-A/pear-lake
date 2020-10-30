@@ -1,9 +1,11 @@
 import React from "react"
-import { Link, useMutation } from "blitz"
+import { useMutation } from "blitz"
 import { LabeledTextField } from "app/components/LabeledTextField"
 import { Form, FORM_ERROR } from "app/components/Form"
+import Link from "app/components/Link"
 import login from "app/auth/mutations/login"
 import { LoginInput } from "app/auth/validations"
+import { FormControl, FormHelperText, FormLabel, Input } from "@chakra-ui/core"
 
 type LoginFormProps = {
   onSuccess?: () => void
@@ -25,6 +27,7 @@ export const LoginForm = (props: LoginFormProps) => {
             await loginMutation(values)
             props.onSuccess?.()
           } catch (error) {
+            console.error(error)
             if (error.name === "AuthenticationError") {
               return { [FORM_ERROR]: "Sorry, those credentials are invalid" }
             } else {

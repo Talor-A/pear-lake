@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgres"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -21,7 +21,6 @@ model User {
   hashedPassword String?
   role           String    @default("user")
   sessions       Session[]
-  notes          Note[]
 }
 
 model Session {
@@ -36,32 +35,4 @@ model Session {
   antiCSRFToken      String?
   publicData         String?
   privateData        String?
-}
-
-model Project {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String
-}
-
-model Note {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String
-  blocks    Block[]
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-}
-
-model Block {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  content   String
-  type      String   @default("paragraph")
-  data      String   @default("{}")
-  note      Note     @relation(fields: [noteId], references: [id])
-  noteId    Int
 }

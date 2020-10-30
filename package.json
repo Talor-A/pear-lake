@@ -31,16 +31,24 @@
     ]
   },
   "dependencies": {
+    "@chakra-ui/core": "0.8.0",
+    "@emotion/core": "10.0.35",
+    "@emotion/styled": "10.0.27",
     "@prisma/cli": "2.10.1",
     "@prisma/client": "2.10.1",
     "blitz": "0.24.3",
+    "emotion-theming": "10.0.27",
+    "final-form": "4.20.1",
+    "prismjs": "1.22.0",
     "react": "0.0.0-experimental-7f28234f8",
     "react-dom": "0.0.0-experimental-7f28234f8",
     "react-error-boundary": "2.3.2",
+    "react-final-form": "6.5.2",
     "secure-password": "4.0.0",
-    "zod": "1.11.10",
-    "final-form": "4.20.1",
-    "react-final-form": "6.5.2"
+    "slate": "0.59.0",
+    "slate-history": "0.59.0",
+    "slate-react": "0.59.0",
+    "zod": "1.11.10"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "5.11.5",
@@ -63,12 +71,12 @@
     "jest": "26.6.1",
     "jest-environment-jsdom-fourteen": "1.0.1",
     "jest-watch-typeahead": "0.6.1",
-    "react-test-renderer": "16.14.0",
     "lint-staged": "10.5.0",
     "prettier": "2.1.2",
     "pretty-quick": "3.1.0",
-    "typescript": "4.0.5",
-    "ts-jest": "26.4.3"
+    "react-test-renderer": "16.14.0",
+    "ts-jest": "26.4.3",
+    "typescript": "4.0.5"
   },
   "private": true
 }

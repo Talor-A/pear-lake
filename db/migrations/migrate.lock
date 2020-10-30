@@ -1,0 +1,5 @@
+# Prisma Migrate lockfile v1
+
+20201030031903-init
+20201030032252-postgres
+20201030034114-copy-schema
