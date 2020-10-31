@@ -5,7 +5,6 @@ import { Form, FORM_ERROR } from "app/components/Form"
 import Link from "app/components/Link"
 import login from "app/auth/mutations/login"
 import { LoginInput } from "app/auth/validations"
-import { FormControl, FormHelperText, FormLabel, Input } from "@chakra-ui/core"
 
 type LoginFormProps = {
   onSuccess?: () => void

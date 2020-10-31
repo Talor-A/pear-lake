@@ -71,12 +71,16 @@ export const NotesLayout = ({ title, children }: LayoutProps) => {
   const router = useRouter()
 
   return (
-    <Layout title={title}>
-      <Stack h={"100vh"} minW={400} bg={bgColor[colorMode]}>
-        <Suspense fallback="Loading..">
-          <NotesList />
-        </Suspense>
-      </Stack>
+    <Layout
+      title={title}
+      sidemenu={
+        <Stack h={"100vh"} minW={400} bg={bgColor[colorMode]}>
+          <Suspense fallback="Loading..">
+            <NotesList />
+          </Suspense>
+        </Stack>
+      }
+    >
       {children}
     </Layout>
   )
