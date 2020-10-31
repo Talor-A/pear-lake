@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/core"
 import React, { useMemo, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { createEditor, Node } from "slate"
-import { Slate, Editable, withReact } from "slate-react"
+import PluginEditor from "./PluginEditor"
 
 type NoteFormProps = {
   nodes: Node[]
@@ -11,8 +11,6 @@ type NoteFormProps = {
 }
 
 const NoteForm = ({ nodes, onSubmit, readonly = false }: NoteFormProps) => {
-  const editor = useMemo(() => withReact(createEditor()), [])
-  // Add the initial value when setting up our state.
   const [value, setValue] = useState<Node[]>(
     nodes.length
       ? nodes
@@ -31,9 +29,7 @@ const NoteForm = ({ nodes, onSubmit, readonly = false }: NoteFormProps) => {
   return (
     <>
       <ErrorBoundary fallbackRender={(props) => <p>An error occured rendering.</p>}>
-        <Slate editor={editor} value={value} onChange={onChange}>
-          <Editable readOnly={readonly} />
-        </Slate>
+        <PluginEditor value={value} onChange={onChange} />
         {!readonly && <Button onClick={() => onSubmit && onSubmit(value)}>submit</Button>}
       </ErrorBoundary>
     </>

@@ -36,6 +36,7 @@
     "@emotion/styled": "10.0.27",
     "@prisma/cli": "2.10.1",
     "@prisma/client": "2.10.1",
+    "@udecode/slate-plugins": "0.67.4",
     "blitz": "0.24.3",
     "emotion-theming": "10.0.27",
     "final-form": "4.20.1",
@@ -47,6 +48,7 @@
     "secure-password": "4.0.0",
     "slate": "0.59.0",
     "slate-history": "0.59.0",
+    "slate-hyperscript": "0.59.0",
     "slate-react": "0.59.0",
     "zod": "1.11.10"
   },

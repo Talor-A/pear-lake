@@ -1,20 +1,20 @@
 import React, { Suspense } from "react"
 import Layout from "app/layouts/Notes"
-import { usePaginatedQuery, useRouter, BlitzPage } from "blitz"
-import getNotes from "app/notes/queries/getMyNotes"
+import { BlitzPage } from "blitz"
 import Link from "app/components/Link"
-import { Box, Button, Stack, Text } from "@chakra-ui/core"
-import MarkdownPreviewExample from "app/notes/components/MarkdownEditor"
-
-const ITEMS_PER_PAGE = 100
+import { Button, Stack } from "@chakra-ui/core"
 
 const NotesPage: BlitzPage = () => {
   return (
     <Stack>
       <p>
-        <Link href="/notes/new">Create Note</Link>
+        <Link href="/notes/markdown">
+          <Button>Markdown Example</Button>
+        </Link>
+        <Link href="/notes/plugins">
+          <Button>Plugins Example</Button>
+        </Link>
       </p>
-      <MarkdownPreviewExample />
     </Stack>
   )
 }
