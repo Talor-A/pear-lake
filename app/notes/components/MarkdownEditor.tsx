@@ -39,24 +39,32 @@ const MarkdownPreviewExample = () => {
 
     const tokens: Token[] = Prism.tokenize(node.text, Prism.languages.markdown)
 
-    console.group("TOKENS")
-    console.table(tokens.map((token) => [token, token.length]))
-    console.log("Tokens", tokens)
+    // console.group("TOKENS")
+    // console.table(tokens.map((token) => [token, token.length]))
+    // console.log("Tokens", tokens)
 
-    const createRanges = (tokens: Token[], ranges: Range[] = [], start = 0) => {
+    const createRanges = (tokens: Token[], start = 0) => {
       let myRanges: Range[] = []
       for (const token of tokens) {
         const length = getLength(token)
         const end = start + length
         if (typeof token !== "string") {
-          let obj = {
+          let obj: Range = {
             [token.type]: true,
             anchor: { path, offset: start },
             focus: { path, offset: end },
           }
+          if (token.type === "title") {
+            const hashes = token.content.find(
+              (innerToken: any) => innerToken.type === "punctuation"
+            )
+            obj.level = hashes?.length || 1
+          }
           if (token.alias) obj[token.alias] = true
           myRanges.push(obj)
-          myRanges = [...myRanges, ...createRanges(token.content, myRanges, start)]
+          if (token.type !== "title") {
+            myRanges = [...myRanges, ...createRanges(token.content, start)]
+          }
         }
         start = end
       }
@@ -64,8 +72,8 @@ const MarkdownPreviewExample = () => {
     }
 
     const ranges = createRanges(tokens)
-    console.log("Ranges:", ranges)
-    console.groupEnd()
+    // console.log("Ranges:", ranges)
+    // console.groupEnd()
 
     return ranges
   }, [])
@@ -76,14 +84,23 @@ const MarkdownPreviewExample = () => {
     </Slate>
   )
 }
-
+const headingSize = (level: number) => {
+  switch (level) {
+    case 1:
+      return "2xl"
+    case 2:
+      return "xl"
+    default:
+      return "lg"
+  }
+}
 const Leaf = ({ attributes, children, leaf, text }: RenderLeafProps) => {
   if (leaf.title) {
-    children = <Heading>{children}</Heading>
+    children = <Heading size={headingSize((leaf.level as number) || 1)}>{children}</Heading>
   }
   if (leaf.punctuation) {
     children = (
-      <Paragraph as="span" color="blue.500" bg="red.100">
+      <Paragraph as="span" opacity={0.5}>
         {children}
       </Paragraph>
     )
@@ -101,7 +118,7 @@ const Leaf = ({ attributes, children, leaf, text }: RenderLeafProps) => {
   // }
   if (leaf.bold)
     children = (
-      <Paragraph as="strong" bg="blue.100" fontWeight="bolder">
+      <Paragraph as="strong" fontWeight="bolder">
         {children}
       </Paragraph>
     )

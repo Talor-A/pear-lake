@@ -36,6 +36,7 @@
     "@emotion/styled": "10.0.27",
     "@prisma/cli": "2.10.1",
     "@prisma/client": "2.10.1",
+    "@styled-icons/material": "10.18.0",
     "@udecode/slate-plugins": "0.67.4",
     "blitz": "0.24.3",
     "emotion-theming": "10.0.27",
@@ -50,6 +51,7 @@
     "slate-history": "0.59.0",
     "slate-hyperscript": "0.59.0",
     "slate-react": "0.59.0",
+    "styled-components": "5.2.1",
     "zod": "1.11.10"
   },
   "devDependencies": {
@@ -62,6 +64,7 @@
     "@typescript-eslint/eslint-plugin": "4.6.0",
     "@typescript-eslint/parser": "4.6.0",
     "babel-eslint": "10.1.0",
+    "babel-plugin-styled-components": "1.11.1",
     "eslint": "7.12.1",
     "eslint-config-react-app": "5.2.1",
     "eslint-plugin-flowtype": "5.2.0",

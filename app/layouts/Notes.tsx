@@ -17,6 +17,7 @@ const Note = ({ note, active }: NoteProps) => {
   const { colorMode, toggleColorMode } = useColorMode()
   const selectedColor = { light: "blue.200", dark: "blue.500" }
   const hoverColor = { light: "blue.100", dark: "blue.400" }
+  const borderColor = { light: "gray.200", dark: "gray.400" }
 
   return (
     <Link
@@ -27,7 +28,14 @@ const Note = ({ note, active }: NoteProps) => {
       href="/notes/[noteId]"
       as={`/notes/${note.id}`}
     >
-      <Box p={4} h={100} overflow={"none"} key={note.id}>
+      <Box
+        p={4}
+        h={100}
+        overflow={"none"}
+        key={note.id}
+        borderBottomWidth={1}
+        borderColor={borderColor[colorMode]}
+      >
         <Text fontSize={"lg"}>{note.title}</Text>
         <Stack>
           {note.blocks.map((block) => (
@@ -50,9 +58,12 @@ const NotesList = () => {
   const isActive = (note: NoteWithBlocks) => noteId === note.id
   if (!notes.length)
     return (
-      <Box flex={1} display="flex" justifyContent="center" alignItems="center">
+      <Stack flex={1} justifyContent="center" alignItems="center">
         <em>No Notes</em>
-      </Box>
+        <Link href="/notes/new">
+          <Button>Create one</Button>
+        </Link>
+      </Stack>
     )
   return (
     <>

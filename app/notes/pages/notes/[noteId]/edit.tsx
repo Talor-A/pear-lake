@@ -6,6 +6,7 @@ import updateNote from "app/notes/mutations/updateNote"
 import NoteForm from "app/notes/components/NoteForm"
 import { NodeToBlock, BlockToNode } from "app/notes/utils"
 import Link from "app/components/Link"
+import { stringToSlate } from "app/components/editor/utils"
 
 export const EditNote = () => {
   const router = useRouter()
@@ -18,7 +19,7 @@ export const EditNote = () => {
       <h1>Edit Note {note.id}</h1>
 
       <NoteForm
-        nodes={note.blocks.map(BlockToNode)}
+        document={stringToSlate(note.document)}
         onSubmit={async (editorBlocks) => {
           try {
             const updated = await updateNoteMutation({

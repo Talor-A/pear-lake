@@ -1,28 +1,20 @@
 import { Button } from "@chakra-ui/core"
-import React, { useMemo, useState } from "react"
+import React, { useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
-import { createEditor, Node } from "slate"
-import PluginEditor from "./PluginEditor"
+import PluginEditor from "app/components/editor/Editor"
+import { SlateDocument } from "@udecode/slate-plugins"
+import defaultValue from "app/components/editor/utils"
 
 type NoteFormProps = {
-  nodes: Node[]
-  onSubmit?: (value: Node[]) => void
+  document?: SlateDocument
+  onSubmit?: (value: SlateDocument) => void
   readonly?: boolean
 }
 
-const NoteForm = ({ nodes, onSubmit, readonly = false }: NoteFormProps) => {
-  const [value, setValue] = useState<Node[]>(
-    nodes.length
-      ? nodes
-      : [
-          {
-            type: "paragraph",
-            children: [{ text: "" }],
-          },
-        ]
-  )
+const NoteForm = ({ document, onSubmit, readonly = false }: NoteFormProps) => {
+  const [value, setValue] = useState<SlateDocument>(defaultValue)
 
-  const onChange = (newValue: Node[]) => {
+  const onChange = (newValue: SlateDocument) => {
     setValue(newValue)
   }
 

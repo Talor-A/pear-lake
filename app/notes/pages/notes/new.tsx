@@ -1,29 +1,24 @@
-import React from "react"
+import React, { useState } from "react"
 import Layout from "app/layouts/Layout"
 import { useRouter, useMutation, BlitzPage } from "blitz"
 import createNote from "app/notes/mutations/createNote"
 import NoteForm from "app/notes/components/NoteForm"
-import { NodeToBlock } from "app/notes/utils"
 import Link from "app/components/Link"
 
 const NewNotePage: BlitzPage = () => {
   const router = useRouter()
   const [createNoteMutation] = useMutation(createNote)
-
   return (
     <div>
       <h1>Create New Note</h1>
 
       <NoteForm
-        nodes={[]}
-        onSubmit={async (editorBlocks) => {
+        onSubmit={async (doc) => {
           try {
             const note = await createNoteMutation({
               data: {
                 title: "MyNoteName",
-                blocks: {
-                  create: editorBlocks.map(NodeToBlock),
-                },
+                document: JSON.stringify(doc),
               },
             })
             alert("Success!" + JSON.stringify(note))

@@ -9,6 +9,8 @@ import { Box, Button, Heading } from "@chakra-ui/core"
 import updateNote from "app/notes/mutations/updateNote"
 import { NodeToBlock, BlockToNode } from "app/notes/utils"
 import { useToast } from "@chakra-ui/core"
+import { SlateDocument } from "@udecode/slate-plugins"
+import { ErrorBoundary } from "react-error-boundary"
 export const Note = () => {
   const router = useRouter()
   const noteId = useParam("noteId", "number")
@@ -16,36 +18,40 @@ export const Note = () => {
   const [deleteNoteMutation] = useMutation(deleteNote)
   const [updateNoteMutation] = useMutation(updateNote)
   const toast = useToast()
-
+  let doc
+  try {
+    doc = JSON.parse(note.document) as SlateDocument
+  } catch (err) {
+    console.error(err)
+  }
   return (
     <Box p={8}>
-      <Heading as="h1" size="2xl" lineHeight="2xl">
-        {note.title}
-      </Heading>
-
-      <NoteForm
-        nodes={note.blocks.map(BlockToNode)}
-        onSubmit={async (editorBlocks) => {
-          try {
-            const updated = await updateNoteMutation({
-              where: { id: note.id },
-              data: {
-                title: "myNewTitle",
-                blocks: {
-                  deleteMany: { noteId: note.id },
-                  create: editorBlocks.map(NodeToBlock),
+      {doc && (
+        <NoteForm
+          document={doc}
+          onSubmit={async (editorBlocks) => {
+            try {
+              const updated = await updateNoteMutation({
+                where: { id: note.id },
+                data: {
+                  title: "myNewTitle",
+                  blocks: {
+                    deleteMany: { noteId: note.id },
+                    create: editorBlocks.map(NodeToBlock),
+                  },
                 },
-              },
-            })
-            await mutate(updated)
-            toast({ title: "Saved!" })
-            router.push("/notes/[noteId]", `/notes/${updated.id}`)
-          } catch (error) {
-            console.log(error)
-            toast({ title: "Error creating note ", status: "error" })
-          }
-        }}
-      />
+              })
+              await mutate(updated)
+              toast({ title: "Saved!" })
+              router.push("/notes/[noteId]", `/notes/${updated.id}`)
+            } catch (error) {
+              console.log(error)
+              toast({ title: "Error creating note ", status: "error" })
+            }
+          }}
+        />
+      )}
+
       <Button
         type="button"
         onClick={async () => {
