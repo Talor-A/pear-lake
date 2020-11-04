@@ -1,0 +1,1 @@
+web: blitz start --production --port=$PORT

@@ -1,7 +1,7 @@
 import { Button, Code, Divider, Stack } from "@chakra-ui/core"
 import React, { useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
-import PluginEditor from "app/components/editor/BasicEditor"
+import PluginEditor from "app/components/editor/Editor"
 import { SlateDocument } from "@udecode/slate-plugins"
 import defaultValue, { extractTitle } from "app/components/editor/utils"
 
