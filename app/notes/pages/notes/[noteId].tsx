@@ -5,12 +5,11 @@ import getNote from "app/notes/queries/getNote"
 import deleteNote from "app/notes/mutations/deleteNote"
 import NoteForm from "app/notes/components/NoteForm"
 import Link from "app/components/Link"
-import { Box, Button, Heading } from "@chakra-ui/core"
+import { Box, Button } from "@chakra-ui/core"
 import updateNote from "app/notes/mutations/updateNote"
-import { NodeToBlock, BlockToNode } from "app/notes/utils"
 import { useToast } from "@chakra-ui/core"
 import { SlateDocument } from "@udecode/slate-plugins"
-import { ErrorBoundary } from "react-error-boundary"
+
 export const Note = () => {
   const router = useRouter()
   const noteId = useParam("noteId", "number")
@@ -18,7 +17,7 @@ export const Note = () => {
   const [deleteNoteMutation] = useMutation(deleteNote)
   const [updateNoteMutation] = useMutation(updateNote)
   const toast = useToast()
-  let doc
+  let doc: SlateDocument | undefined
   try {
     doc = JSON.parse(note.document) as SlateDocument
   } catch (err) {
@@ -29,16 +28,13 @@ export const Note = () => {
       {doc && (
         <NoteForm
           document={doc}
-          onSubmit={async (editorBlocks) => {
+          onSubmit={async (doc) => {
             try {
               const updated = await updateNoteMutation({
                 where: { id: note.id },
                 data: {
-                  title: "myNewTitle",
-                  blocks: {
-                    deleteMany: { noteId: note.id },
-                    create: editorBlocks.map(NodeToBlock),
-                  },
+                  title: doc[0].children[0].text as string,
+                  document: JSON.stringify(doc),
                 },
               })
               await mutate(updated)

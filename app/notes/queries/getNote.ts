@@ -6,7 +6,7 @@ type GetNoteInput = Pick<FindFirstNoteArgs, "where">
 export default async function getNote({ where }: GetNoteInput, ctx: Ctx) {
   ctx.session.authorize()
 
-  const note = await db.note.findFirst({ where, include: { blocks: true } })
+  const note = await db.note.findFirst({ where })
 
   if (!note) throw new NotFoundError()
 

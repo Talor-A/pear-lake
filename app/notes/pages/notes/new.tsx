@@ -4,6 +4,7 @@ import { useRouter, useMutation, BlitzPage } from "blitz"
 import createNote from "app/notes/mutations/createNote"
 import NoteForm from "app/notes/components/NoteForm"
 import Link from "app/components/Link"
+import { createBlankDoc, extractTitle } from "app/components/editor/utils"
 
 const NewNotePage: BlitzPage = () => {
   const router = useRouter()
@@ -13,11 +14,12 @@ const NewNotePage: BlitzPage = () => {
       <h1>Create New Note</h1>
 
       <NoteForm
+        document={createBlankDoc()}
         onSubmit={async (doc) => {
           try {
             const note = await createNoteMutation({
               data: {
-                title: "MyNoteName",
+                title: extractTitle(doc),
                 document: JSON.stringify(doc),
               },
             })
