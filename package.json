@@ -5,6 +5,8 @@
     "start": "blitz start",
     "studio": "blitz db studio",
     "build": "blitz build",
+    "start:production": "blitz start --production --port $PORT",
+    "heroku-postbuild": "blitz db migrate && blitz build --production",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
     "test": "jest",
     "test:watch": "jest --watch"

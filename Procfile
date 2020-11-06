@@ -1,1 +1,1 @@
-web: blitz start --production --port=$PORT
+web: npm run start:production
