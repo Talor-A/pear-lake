@@ -20,8 +20,10 @@ const NoteForm = ({ document, onSubmit, onAutoSave, readonly = false }: NoteForm
   }, 1000)
 
   const handleChange = (newValue: SlateDocument) => {
-    setValue(newValue)
-    callback(newValue)
+    setValue((prev) => {
+      if (prev !== newValue) callback(newValue)
+      return newValue
+    })
   }
 
   return (
