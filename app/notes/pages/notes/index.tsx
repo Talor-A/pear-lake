@@ -2,20 +2,19 @@ import React, { Suspense } from "react"
 import Layout from "app/layouts/Notes"
 import { BlitzPage } from "blitz"
 import Link from "app/components/Link"
-import { Button, Stack } from "@chakra-ui/core"
 
 const NotesPage: BlitzPage = () => {
   return (
-    <Stack>
+    <div>
       <p>
         <Link href="/notes/markdown">
-          <Button>Markdown Example</Button>
+          <button>Markdown Example</button>
         </Link>
         <Link href="/notes/plugins">
-          <Button>Plugins Example</Button>
+          <button>Plugins Example</button>
         </Link>
       </p>
-    </Stack>
+    </div>
   )
 }
 

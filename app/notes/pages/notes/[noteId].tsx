@@ -5,7 +5,6 @@ import getNote from "app/notes/queries/getNote"
 import deleteNote from "app/notes/mutations/deleteNote"
 import NoteForm from "app/notes/components/NoteForm"
 import Link from "app/components/Link"
-import { Box, Button } from "@chakra-ui/core"
 import updateNote from "app/notes/mutations/updateNote"
 import { useToast } from "@chakra-ui/core"
 import { SlateDocument } from "@udecode/slate-plugins"
@@ -24,7 +23,7 @@ export const Note = () => {
     console.error(err)
   }
   return (
-    <Box p={8}>
+    <>
       {doc && (
         <NoteForm
           document={doc}
@@ -48,7 +47,7 @@ export const Note = () => {
         />
       )}
 
-      <Button
+      <button
         type="button"
         onClick={async () => {
           if (window.confirm("This will be deleted")) {
@@ -58,8 +57,8 @@ export const Note = () => {
         }}
       >
         Delete
-      </Button>
-    </Box>
+      </button>
+    </>
   )
 }
 

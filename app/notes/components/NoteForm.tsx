@@ -1,4 +1,3 @@
-import { Button, Code, Divider, Stack } from "@chakra-ui/core"
 import React, { useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import PluginEditor from "app/components/editor/Editor"
@@ -19,17 +18,17 @@ const NoteForm = ({ document, onSubmit, readonly = false }: NoteFormProps) => {
   }
 
   return (
-    <Stack>
+    <div>
       <ErrorBoundary fallbackRender={(props) => <p>An error occured rendering.</p>}>
         <PluginEditor value={value} onChange={onChange} />
-        {!readonly && <Button onClick={() => onSubmit && onSubmit(value)}>submit</Button>}
-        <Divider />
-        <Code>
+        {!readonly && <button onClick={() => onSubmit && onSubmit(value)}>submit</button>}
+        <hr />
+        <code>
           Title: {extractTitle(value)}
           <pre>{JSON.stringify(value, null, 2)}</pre>
-        </Code>
+        </code>
       </ErrorBoundary>
-    </Stack>
+    </div>
   )
 }
 

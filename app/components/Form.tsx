@@ -1,4 +1,3 @@
-import { Button } from "@chakra-ui/core"
 import React, { ReactNode, PropsWithoutRef } from "react"
 import { Form as FinalForm, FormProps as FinalFormProps } from "react-final-form"
 import * as z from "zod"
@@ -45,9 +44,9 @@ export function Form<S extends z.ZodType<any, any>>({
             </div>
           )}
 
-          <Button type="submit" isDisabled={submitting}>
+          <button type="submit" disabled={submitting}>
             {submitText}
-          </Button>
+          </button>
 
           <style global jsx>{`
             .form > * + * {

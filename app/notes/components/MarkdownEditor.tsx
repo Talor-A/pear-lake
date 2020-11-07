@@ -3,8 +3,6 @@ import React, { useState, useCallback, useMemo } from "react"
 import { Slate, Editable, withReact, RenderLeafProps } from "slate-react"
 import { Node, Text, createEditor, Range } from "slate"
 import { withHistory } from "slate-history"
-import { css } from "@emotion/core"
-import { Divider, Heading, ListItem, Text as Paragraph } from "@chakra-ui/core"
 
 // eslint-disable-next-line
 ;Prism.languages.markdown=Prism.languages.extend("markup",{}),Prism.languages.insertBefore("markdown","prolog",{blockquote:{pattern:/^>(?:[\t ]*>)*/m,alias:"punctuation"},code:[{pattern:/^(?: {4}|\t).+/m,alias:"keyword"},{pattern:/``.+?``|`[^`\n]+`/,alias:"keyword"}],title:[{pattern:/\w+.*(?:\r?\n|\r)(?:==+|--+)/,alias:"important",inside:{punctuation:/==+$|--+$/}},{pattern:/(^\s*)#+.+/m,lookbehind:!0,alias:"important",inside:{punctuation:/^#+|#+$/}}],hr:{pattern:/(^\s*)([*-])([\t ]*\2){2,}(?=\s*$)/m,lookbehind:!0,alias:"punctuation"},list:{pattern:/(^\s*)(?:[*+-]|\d+\.)(?=[\t ].)/m,lookbehind:!0,alias:"punctuation"},"url-reference":{pattern:/!?\[[^\]]+\]:[\t ]+(?:\S+|<(?:\\.|[^>\\])+>)(?:[\t ]+(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\((?:\\.|[^)\\])*\)))?/,inside:{variable:{pattern:/^(!?\[)[^\]]+/,lookbehind:!0},string:/(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\((?:\\.|[^)\\])*\))$/,punctuation:/^[\[\]!:]|[<>]/},alias:"url"},bold:{pattern:/(^|[^\\])(\*\*|__)(?:(?:\r?\n|\r)(?!\r?\n|\r)|.)+?\2/,lookbehind:!0,inside:{punctuation:/^\*\*|^__|\*\*$|__$/}},italic:{pattern:/(^|[^\\])([*_])(?:(?:\r?\n|\r)(?!\r?\n|\r)|.)+?\2/,lookbehind:!0,inside:{punctuation:/^[*_]|[*_]$/}},url:{pattern:/!?\[[^\]]+\](?:\([^\s)]+(?:[\t ]+"(?:\\.|[^"\\])*")?\)| ?\[[^\]\n]*\])/,inside:{variable:{pattern:/(!?\[)[^\]]+(?=\]$)/,lookbehind:!0},string:{pattern:/"(?:\\.|[^"\\])*"(?=\)$)/}}}}),Prism.languages.markdown.bold.inside.url=Prism.util.clone(Prism.languages.markdown.url),Prism.languages.markdown.italic.inside.url=Prism.util.clone(Prism.languages.markdown.url),Prism.languages.markdown.bold.inside.italic=Prism.util.clone(Prism.languages.markdown.italic),Prism.languages.markdown.italic.inside.bold=Prism.util.clone(Prism.languages.markdown.bold); // prettier-ignore
@@ -84,58 +82,42 @@ const MarkdownPreviewExample = () => {
     </Slate>
   )
 }
-const headingSize = (level: number) => {
+const h1Size = (level: number) => {
   switch (level) {
     case 1:
-      return "2xl"
+      return "h1"
     case 2:
-      return "xl"
+      return "h2"
     default:
-      return "lg"
+      return "h3"
   }
 }
 const Leaf = ({ attributes, children, leaf, text }: RenderLeafProps) => {
   if (leaf.title) {
-    children = <Heading size={headingSize((leaf.level as number) || 1)}>{children}</Heading>
+    const Component = h1Size((leaf.level as number) || 1)
+    children = <Component>{children}</Component>
   }
   if (leaf.punctuation) {
-    children = (
-      <Paragraph as="span" opacity={0.5}>
-        {children}
-      </Paragraph>
-    )
+    children = <span style={{ opacity: 0.5 }}>{children}</span>
   }
 
   // if (leaf.blockquote) return <Blockquote {...attributes}>{children}</Blockquote>
-  if (leaf.hr) return <Divider />
-  if (leaf.list) return <ListItem {...attributes}>{children}</ListItem>
+  if (leaf.hr) return <hr />
+  if (leaf.list) return <li {...attributes}>{children}</li>
   // if (leaf.punctuation) {
   //   return (
-  //     <Paragraph as="span" {...attributes} color={"blue.500"}>
+  //     <span as="span" {...attributes} color={"blue.500"}>
   //       {children}
-  //     </Paragraph>
+  //     </span>
   //   )
   // }
-  if (leaf.bold)
-    children = (
-      <Paragraph as="strong" fontWeight="bolder">
-        {children}
-      </Paragraph>
-    )
+  if (leaf.bold) children = <strong>{children}</strong>
 
   if (leaf.italic) {
-    children = (
-      <Paragraph as="span" fontStyle={"italic"}>
-        {children}
-      </Paragraph>
-    )
+    children = <em>{children}</em>
   }
   if (leaf.underline) {
-    children = (
-      <Paragraph as="span" fontStyle={"italic"}>
-        {children}
-      </Paragraph>
-    )
+    children = <span style={{ textDecoration: "underline" }}>{children}</span>
   }
 
   return <span {...attributes}>{children}</span>

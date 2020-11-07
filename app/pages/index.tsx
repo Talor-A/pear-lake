@@ -4,7 +4,6 @@ import logout from "app/auth/mutations/logout"
 import { useCurrentUser } from "app/hooks/useCurrentUser"
 import { Suspense } from "react"
 import Link from "app/components/Link"
-import { Button, Stack } from "@chakra-ui/core"
 
 /*
  * This file is just for a pleasant getting started page for your new app.
@@ -35,14 +34,14 @@ const UserInfo = () => {
     )
   } else {
     return (
-      <Stack h={"100vh"} isInline justify="center" align="center">
+      <div /* h={"100vh"} isInline justify="center" align="center" */>
         <Link href="/signup">
-          <Button size="sm">Sign Up</Button>
+          <button>Sign Up</button>
         </Link>
         <Link href="/login">
-          <Button size="sm">Login</Button>
+          <button>Login</button>
         </Link>
-      </Stack>
+      </div>
     )
   }
 }

@@ -2,11 +2,12 @@ import React, { Suspense } from "react"
 import { usePaginatedQuery, useRouter, BlitzPage, useParam, useQuery } from "blitz"
 import getNotes from "app/notes/queries/getMyNotes"
 import Link from "app/components/Link"
-import { Box, Button, Stack, Text, useColorMode } from "@chakra-ui/core"
 import Layout, { LayoutProps } from "./Layout"
 import { render } from "@testing-library/react"
 import { Block } from "@prisma/client"
 import { NoteWithBlocks } from "app/notes/utils"
+import { Row, Col } from "app/components/layout"
+import styles from "./layout.module.css"
 
 const ITEMS_PER_PAGE = 100
 type NoteProps = {
@@ -14,37 +15,23 @@ type NoteProps = {
   active: boolean
 }
 const Note = ({ note, active }: NoteProps) => {
-  const { colorMode, toggleColorMode } = useColorMode()
-  const selectedColor = { light: "blue.200", dark: "blue.500" }
-  const hoverColor = { light: "blue.100", dark: "blue.400" }
-  const borderColor = { light: "gray.200", dark: "gray.400" }
-
   return (
-    <Link
-      boxSizing={"border-box"}
-      borderLeftColor={active ? selectedColor[colorMode] : "transparent"}
-      borderLeftWidth={4}
-      _hover={{ bg: "#00000008", borderLeftColor: active ? undefined : hoverColor[colorMode] }}
-      href="/notes/[noteId]"
-      as={`/notes/${note.id}`}
-    >
-      <Box
-        p={4}
-        h={100}
-        overflow={"none"}
+    <Link href="/notes/[noteId]" as={`/notes/${note.id}`}>
+      <div
         key={note.id}
-        borderBottomWidth={1}
-        borderColor={borderColor[colorMode]}
+        // p={4}
+        // h={100}
+        // overflow={"none"}
+        // borderBottomWidth={1}
+        // borderColor={borderColor[colorMode]}
       >
-        <Text fontSize={"lg"}>{note.title}</Text>
-        <Stack>
+        <span /* fontSize={"lg"} */>{note.title}</span>
+        <div>
           {note.blocks.map((block) => (
-            <Text opacity={0.65} key={block.id}>
-              {block.content}
-            </Text>
+            <span /* opacity={0.65}  */ key={block.id}>{block.content}</span>
           ))}
-        </Stack>
-      </Box>
+        </div>
+      </div>
     </Link>
   )
 }
@@ -58,12 +45,12 @@ const NotesList = () => {
   const isActive = (note: NoteWithBlocks) => noteId === note.id
   if (!notes.length)
     return (
-      <Stack flex={1} justifyContent="center" alignItems="center">
+      <Col className={styles.center}>
         <em>No Notes</em>
         <Link href="/notes/new">
-          <Button>Create one</Button>
+          <button>Create one</button>
         </Link>
-      </Stack>
+      </Col>
     )
   return (
     <>
@@ -75,21 +62,15 @@ const NotesList = () => {
 }
 
 export const NotesLayout = ({ title, children }: LayoutProps) => {
-  const { colorMode, toggleColorMode } = useColorMode()
-  const bgColor = { light: "gray.50", dark: "gray.800" }
-  // const color = { light: "white", dark: "gray.800" };
-
-  const router = useRouter()
-
   return (
     <Layout
       title={title}
       sidemenu={
-        <Stack h={"100vh"} minW={400} bg={bgColor[colorMode]}>
+        <div /* h={"100vh"} minW={400} bg={bgColor[colorMode]} */>
           <Suspense fallback="Loading..">
             <NotesList />
           </Suspense>
-        </Stack>
+        </div>
       }
     >
       {children}

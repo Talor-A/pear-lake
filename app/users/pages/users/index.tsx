@@ -3,7 +3,6 @@ import Layout from "app/layouts/Layout"
 import { usePaginatedQuery, useRouter, BlitzPage } from "blitz"
 import getUsers from "app/users/queries/getUsers"
 import Link from "app/components/Link"
-import { Button } from "@chakra-ui/core"
 
 const ITEMS_PER_PAGE = 100
 
@@ -31,12 +30,12 @@ export const UsersList = () => {
         ))}
       </ul>
 
-      <Button isDisabled={page === 0} onClick={goToPreviousPage}>
+      <button disabled={page === 0} onClick={goToPreviousPage}>
         Previous
-      </Button>
-      <Button isDisabled={!hasMore} onClick={goToNextPage}>
+      </button>
+      <button disabled={!hasMore} onClick={goToNextPage}>
         Next
-      </Button>
+      </button>
     </div>
   )
 }

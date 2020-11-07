@@ -28,9 +28,7 @@ import options, { resetBlockTypesCommonRule } from "./options"
 
 export const plugins = [
   ParagraphPlugin(options),
-  HeadingPlugin({
-    levels: 3,
-  }),
+  HeadingPlugin(options),
   CodeBlockPlugin(options),
   BlockquotePlugin(options),
   ListPlugin(options),
