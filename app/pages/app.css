@@ -1,14 +1,34 @@
+:root {
+  --nc-font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Open Sans", "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  --nc-font-mono: Consolas, monaco, "Ubuntu Mono", "Liberation Mono", "Courier New", Courier,
+    monospace;
+  --nc-tx-1: #000000;
+  --nc-tx-2: #1a1a1a;
+  --nc-tx-3: #555555;
+  --nc-bg-1: #ffffff;
+  --nc-bg-2: #f6f8fa;
+  --nc-bg-3: #e5e7eb;
+  --nc-lk-1: #0070f3;
+  --nc-lk-2: #0366d6;
+  --nc-lk-tx: #ffffff;
+  --nc-ac-1: #79ffe1;
+  --nc-ac-tx: #0c4047;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --nc-tx-1: #ffffff;
     --nc-tx-2: #eeeeee;
+    --nc-tx-3: #888888;
     --nc-bg-1: #1a1a1a;
     --nc-bg-2: #212121;
     --nc-bg-3: #303030;
-    --nc-lk-1: #3291ff;
-    --nc-lk-2: #0070f3;
+    --nc-lk-1: #3399c9;
+    --nc-lk-2: #087db3;
     --nc-lk-tx: #ffffff;
-    --nc-ac-1: #7928ca;
+    --nc-ac-1: #1392cc;
     --nc-ac-tx: #ffffff;
   }
 }

@@ -49,6 +49,7 @@
     "react-dom": "0.0.0-experimental-7f28234f8",
     "react-error-boundary": "2.3.2",
     "react-final-form": "6.5.2",
+    "sass": "1.29.0",
     "secure-password": "4.0.0",
     "slate": "0.59.0",
     "slate-history": "0.59.0",
