@@ -19,8 +19,7 @@ const Layout = ({ title, children, sidemenu }: LayoutProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Row className={styles["full-height"]}>
-        <DesktopMenu />
-        {sidemenu}
+        <DesktopMenu>{sidemenu}</DesktopMenu>
         <div className={styles.scroll}>
           <main className={styles.main}>{children}</main>
         </div>

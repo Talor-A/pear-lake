@@ -26,3 +26,9 @@ h3 {
 code {
   display: block;
 }
+li {
+  margin-top: 0;
+}
+li + li {
+  margin-top: 0.4rem;
+}

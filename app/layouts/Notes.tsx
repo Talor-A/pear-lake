@@ -16,23 +16,18 @@ type NoteProps = {
 }
 const Note = ({ note, active }: NoteProps) => {
   return (
-    <Link href="/notes/[noteId]" as={`/notes/${note.id}`}>
-      <div
-        key={note.id}
-        // p={4}
-        // h={100}
-        // overflow={"none"}
-        // borderBottomWidth={1}
-        // borderColor={borderColor[colorMode]}
-      >
-        <span /* fontSize={"lg"} */>{note.title}</span>
-        <div>
-          {note.blocks.map((block) => (
-            <span /* opacity={0.65}  */ key={block.id}>{block.content}</span>
-          ))}
-        </div>
-      </div>
-    </Link>
+    <li
+      key={note.id}
+      // p={4}
+      // h={100}
+      // overflow={"none"}
+      // borderBottomWidth={1}
+      // borderColor={borderColor[colorMode]}
+    >
+      <Link href="/notes/[noteId]" as={`/notes/${note.id}`}>
+        <a /* fontSize={"lg"} */>{note.title}</a>
+      </Link>
+    </li>
   )
 }
 
@@ -53,11 +48,11 @@ const NotesList = () => {
       </Col>
     )
   return (
-    <>
+    <ul>
       {notes.map((note) => (
         <Note key={note.id} active={isActive(note)} note={note} />
       ))}
-    </>
+    </ul>
   )
 }
 
@@ -66,11 +61,9 @@ export const NotesLayout = ({ title, children }: LayoutProps) => {
     <Layout
       title={title}
       sidemenu={
-        <div /* h={"100vh"} minW={400} bg={bgColor[colorMode]} */>
-          <Suspense fallback="Loading..">
-            <NotesList />
-          </Suspense>
-        </div>
+        <Suspense fallback="Loading..">
+          <NotesList />
+        </Suspense>
       }
     >
       {children}

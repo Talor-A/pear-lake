@@ -1,3 +1,16 @@
 .menu {
   float: left;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  height: 100vh;
+  background-color: var(--nc-bg-2);
+}
+.menuHeader {
+  padding: 2rem;
+  background-color: var(--nc-bg-3);
+}
+.menuMain {
+  padding: 2rem;
+  flex: 1;
 }
