@@ -3,7 +3,7 @@ import {
   DEFAULTS_BOLD,
   DEFAULTS_UNDERLINE,
   DEFAULTS_ITALIC,
-  DEFAULTS_HEADING,
+  ELEMENT_CODE_BLOCK,
   DEFAULTS_CODE_BLOCK,
   DEFAULTS_LIST,
   DEFAULTS_TODO_LIST,
@@ -26,8 +26,24 @@ const HEADING_OPTIONS = {
   },
 } as const
 
+const Code = ({ children, ...props }) => (
+  <pre {...props}>
+    <code>{children}</code>
+  </pre>
+)
+
+const CODE_OPTIONS: typeof DEFAULTS_CODE_BLOCK = {
+  code_block: {
+    rootProps: {
+      className: ``,
+    },
+    type: ELEMENT_CODE_BLOCK,
+    component: Code,
+  },
+}
 const options = {
   ...HEADING_OPTIONS,
+  ...CODE_OPTIONS,
   ...DEFAULTS_PARAGRAPH,
   ...DEFAULTS_BOLD,
   ...DEFAULTS_UNDERLINE,
@@ -35,7 +51,6 @@ const options = {
   ...DEFAULTS_LIST,
   ...DEFAULTS_TODO_LIST,
   ...DEFAULTS_BLOCKQUOTE,
-  ...DEFAULTS_CODE_BLOCK,
 }
 export const resetBlockTypesCommonRule = {
   types: [

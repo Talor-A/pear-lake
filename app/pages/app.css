@@ -6,13 +6,15 @@ body {
   height: 100vh;
   width: 100vw;
 }
-
 :root {
   --nc-font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
     Cantarell, "Open Sans", "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol";
   --nc-font-mono: Consolas, monaco, "Ubuntu Mono", "Liberation Mono", "Courier New", Courier,
     monospace;
+}
+:root,
+body.light {
   --nc-tx-1: #000000;
   --nc-tx-2: #1a1a1a;
   --nc-tx-3: #555555;
@@ -41,6 +43,19 @@ body {
     --nc-ac-tx: #ffffff;
   }
 }
+body.dark {
+  --nc-tx-1: #ffffff;
+  --nc-tx-2: #eeeeee;
+  --nc-tx-3: #888888;
+  --nc-bg-1: #1a1a1a;
+  --nc-bg-2: #212121;
+  --nc-bg-3: #303030;
+  --nc-lk-1: #3399c9;
+  --nc-lk-2: #087db3;
+  --nc-lk-tx: #ffffff;
+  --nc-ac-1: #1392cc;
+  --nc-ac-tx: #ffffff;
+}
 
 body {
   max-width: none;
@@ -51,8 +66,9 @@ h1,
 h2,
 h3 {
   margin-bottom: 1rem;
+  font-weight: 300;
 }
-code {
+.code-block {
   display: block;
 }
 li {
@@ -60,4 +76,9 @@ li {
 }
 li + li {
   margin-top: 0.4rem;
+}
+blockquote {
+  border-left: 3px solid var(--nc-ac-1);
+  font-style: italic;
+  color: var(--nc-tx-2);
 }

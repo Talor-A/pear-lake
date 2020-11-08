@@ -20,17 +20,28 @@ import {
   withNormalizeTypes,
   withTrailingNode,
   withTransforms,
+  SoftBreakPlugin,
+  ELEMENT_BLOCKQUOTE,
 } from "@udecode/slate-plugins"
 import { withHistory } from "slate-history"
 import { withReact } from "slate-react"
+
+import { PreviewPlugin } from "./decorateMarkdown"
 
 import options, { resetBlockTypesCommonRule } from "./options"
 
 export const plugins = [
   ParagraphPlugin(options),
   HeadingPlugin(options),
+  PreviewPlugin(),
   CodeBlockPlugin(options),
-  BlockquotePlugin(options),
+  BlockquotePlugin({
+    blockquote: {
+      component: "blockquote",
+      type: ELEMENT_BLOCKQUOTE,
+      rootProps: {},
+    },
+  }),
   ListPlugin(options),
   ResetBlockTypePlugin({
     rules: [
@@ -61,6 +72,17 @@ export const plugins = [
           start: true,
           end: true,
           allow: [ELEMENT_H1, ELEMENT_H2, ELEMENT_H3],
+        },
+      },
+    ],
+  }),
+  SoftBreakPlugin({
+    rules: [
+      { hotkey: "shift+enter" },
+      {
+        hotkey: "enter",
+        query: {
+          allow: [options.code_block.type, options.blockquote.type],
         },
       },
     ],

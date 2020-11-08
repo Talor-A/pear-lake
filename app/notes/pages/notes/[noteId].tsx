@@ -59,8 +59,8 @@ export const Note = () => {
           aria-label="delete note"
           onClick={async () => {
             if (window.confirm("This will be deleted")) {
-              await deleteNoteMutation({ where: { id: note.id } })
               router.push("/notes")
+              deleteNoteMutation({ where: { id: note.id } })
             }
           }}
         ></IconButton>
