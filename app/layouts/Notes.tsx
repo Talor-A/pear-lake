@@ -1,12 +1,10 @@
 import React, { Suspense } from "react"
-import { usePaginatedQuery, useRouter, BlitzPage, useParam, useQuery } from "blitz"
+import { useParam, useQuery } from "blitz"
 import getNotes from "app/notes/queries/getMyNotes"
 import Link from "app/components/Link"
 import Layout, { LayoutProps } from "./Layout"
-import { render } from "@testing-library/react"
-import { Block } from "@prisma/client"
 import { NoteWithBlocks } from "app/notes/utils"
-import { Row, Col } from "app/components/layout"
+import { Col } from "app/components/layout"
 import styles from "./layout.module.css"
 
 const ITEMS_PER_PAGE = 100
@@ -17,12 +15,11 @@ type NoteProps = {
 const Note = ({ note, active }: NoteProps) => {
   return (
     <li
-      key={note.id}
-      // p={4}
-      // h={100}
-      // overflow={"none"}
-      // borderBottomWidth={1}
-      // borderColor={borderColor[colorMode]}
+    // p={4}
+    // h={100}
+    // overflow={"none"}
+    // borderBottomWidth={1}
+    // borderColor={borderColor[colorMode]}
     >
       <Link href="/notes/[noteId]" as={`/notes/${note.id}`}>
         <a /* fontSize={"lg"} */>{note.title}</a>
