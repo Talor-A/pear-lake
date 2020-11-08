@@ -17,7 +17,14 @@ const Editor = ({ value, onChange }: EditorProps) => {
       value={value}
       onChange={(newValue) => onChange(newValue as SlateDocument)}
     >
-      <EditablePlugins spellCheck plugins={plugins} placeholder="Enter some text..." />
+      <EditablePlugins
+        style={{
+          flex: 1,
+        }}
+        spellCheck
+        plugins={plugins}
+        placeholder="Enter some text..."
+      />
     </Slate>
   )
 }

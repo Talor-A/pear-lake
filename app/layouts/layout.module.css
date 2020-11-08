@@ -17,6 +17,9 @@
   padding: 2rem;
   height: 100vh;
 }
+.main :first-child {
+  flex: 1;
+}
 .main h1:first-of-type {
   position: sticky;
 }
