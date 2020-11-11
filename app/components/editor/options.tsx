@@ -9,6 +9,7 @@ import {
   DEFAULTS_TODO_LIST,
   DEFAULTS_BLOCKQUOTE,
 } from "@udecode/slate-plugins"
+import Code from "./components/Code"
 
 const HEADING_OPTIONS = {
   levels: 3,
@@ -25,12 +26,6 @@ const HEADING_OPTIONS = {
     type: "h3",
   },
 } as const
-
-const Code = ({ children, ...props }) => (
-  <pre {...props}>
-    <code>{children}</code>
-  </pre>
-)
 
 const CODE_OPTIONS: typeof DEFAULTS_CODE_BLOCK = {
   code_block: {

@@ -22,9 +22,12 @@ import {
   withTransforms,
   SoftBreakPlugin,
   ELEMENT_BLOCKQUOTE,
+  withNodeID,
+  TodoListPlugin,
 } from "@udecode/slate-plugins"
 import { withHistory } from "slate-history"
 import { withReact } from "slate-react"
+import { nanoid } from "nanoid"
 
 import { PreviewPlugin } from "./decorateMarkdown"
 
@@ -42,6 +45,7 @@ export const plugins = [
       rootProps: {},
     },
   }),
+  TodoListPlugin(options),
   ListPlugin(options),
   ResetBlockTypePlugin({
     rules: [
@@ -168,4 +172,8 @@ export const withPlugins = [
     rules: [{ path: [0, 0], strictType: options.h1.type }],
   }),
   withTrailingNode({ type: options.p.type }),
+  withNodeID({
+    idCreator: nanoid,
+    resetExistingID: true,
+  }),
 ] as const

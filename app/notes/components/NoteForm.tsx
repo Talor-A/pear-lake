@@ -4,6 +4,7 @@ import PluginEditor from "app/components/editor/Editor"
 import { SlateDocument } from "@udecode/slate-plugins"
 import defaultValue, { extractTitle } from "app/components/editor/utils"
 import { useDebouncedCallback } from "use-debounce"
+import Code from "app/components/editor/components/Code"
 
 type NoteFormProps = {
   document?: SlateDocument
@@ -31,11 +32,11 @@ const NoteForm = ({ document, onSubmit, onAutoSave, readonly = false }: NoteForm
       <ErrorBoundary fallbackRender={(props) => <p>An error occured rendering.</p>}>
         <PluginEditor value={value} onChange={handleChange} />
         {!readonly && onSubmit && <button onClick={() => onSubmit(value)}>submit</button>}
-        {/* <hr />
-        <code>
+        <hr />
+        <Code>
           Title: {extractTitle(value)}
-          <pre>{JSON.stringify(value, null, 2)}</pre>
-        </code> */}
+          {JSON.stringify(value, null, 2)}
+        </Code>
       </ErrorBoundary>
     </div>
   )

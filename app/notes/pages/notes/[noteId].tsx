@@ -47,8 +47,10 @@ export const Note = () => {
   }
   return (
     <Stack align="stretch">
-      <Stack isInline align="center" justify="space-between">
+      <Stack isInline align="center">
         <Link href="/notes">Notes</Link>
+        <div>{note.title}</div>
+        <div style={{ marginRight: "auto" }}></div>
         <IconButton
           icon="delete"
           bg="transparent"
@@ -65,7 +67,7 @@ export const Note = () => {
           }}
         ></IconButton>
       </Stack>
-      {doc && <NoteForm document={doc} onAutoSave={save} />}
+      {doc && <NoteForm key={noteId} document={doc} onAutoSave={save} />}
     </Stack>
   )
 }
